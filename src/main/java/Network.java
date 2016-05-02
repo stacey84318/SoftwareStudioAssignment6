@@ -19,6 +19,7 @@ public class Network {
 	}
 
 	public void display(){
+		parent.ellipse(100, 100, 100, 100);
 		
 	}
 	
