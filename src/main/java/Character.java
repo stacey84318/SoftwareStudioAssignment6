@@ -3,6 +3,7 @@ package main.java;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.event.MouseEvent;
 
 /**
 * This class is used to store states of the characters in the program.
@@ -38,6 +39,11 @@ public class Character {
 	
 	public ArrayList<Character> getTargets(){
 		return this.targets;
+	}
+
+	public void setLocation(int x, int y){
+		this.x=x;
+		this.y=y;
 	}
 	
 }

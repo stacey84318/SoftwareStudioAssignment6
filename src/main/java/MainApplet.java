@@ -1,12 +1,17 @@
 package main.java;
 
+import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.EventObject;
 
 import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
-import processing.event.MouseEvent;
+//import processing.event.MouseEvent;
+
+import java.awt.*;
 
 /**
 * This class is for sketching outcome using Processing
@@ -27,6 +32,7 @@ public class MainApplet extends PApplet{
 	private String file7 = "starwars-episode-5-interactions.json";
 
 	int episode=0;
+	int count=0;
 	
 	private final static int width = 1200, height = 650;
 	
@@ -35,21 +41,27 @@ public class MainApplet extends PApplet{
 		characters = new ArrayList<Character>();	
 		smooth();
 		loadData();
-		this.addMouseMotionListener(this);
-	}
-	
-	public void mousePressed(MouseEvent e) {
-		    
+		//this.addMouseMotionListener(this);
 	}
 
 	public void mouseReleased(MouseEvent e) {
+		if(e.getX()>=375&&e.getX()<=925&&e.getY()>=50&&e.getY()<=600){
+			count++;
+			setDot((Character)e.getSource(),e.getX(),e.getY());
+		}
 		   
 	}
 	
 	public void mouseDragged(MouseEvent e) {
-	    
+		((Character)e.getSource()).setLocation(e.getX(),e.getY()); 
 	}
-	 public void keyPressed(KeyEvent e){
+	
+	public void setDot(Character role, int x, int y){
+		
+		role.setLocation(x, y);
+	}
+	 
+	public void keyPressed(KeyEvent e){
 	        switch(e.getKeyCode()){
 	        case KeyEvent.VK_1: 
 	        	episode = 1;
@@ -85,7 +97,7 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
-		if(episode!=0)
+		/*if(episode!=0)
 			this.data = loadJSONObject("file"+episode);
 		this.nodes = data.getJSONArray("nodes");
 		this.links = data.getJSONArray("links");
@@ -95,8 +107,9 @@ public class MainApplet extends PApplet{
 			String name = N.getString("name");
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
-			this.characters.add(new Character(this,name,(i/10)*20,i*10));;
-		}
+			this.characters.add(new Character(this,name,(i/10)*20,i*10));
+			
+		}*/
 
 	}
 
