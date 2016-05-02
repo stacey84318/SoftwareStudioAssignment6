@@ -26,7 +26,10 @@ public class Character {
 	}
 
 	public void display(){
+	
 		parent.text(name, x, y);
+		parent.ellipse(x, y, 30, 30);
+		//parent.ellipseMode(4);
 		/*int i;
 		for(i=0; i<targets.size(); i++)
 			parent.line(x, y, targets.get(i).x, targets.get(i).y);
