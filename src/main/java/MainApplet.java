@@ -36,7 +36,9 @@ public class MainApplet extends PApplet{
 	
 	public void setup() {
 		size(width, height);
-		characters = new ArrayList<Character>();	
+		characters = new ArrayList<Character>();
+		inCircle = new ArrayList<Character>();
+		count=0;
 		smooth();
 		loadData();
 		this.addMouseListener(this);
@@ -59,17 +61,21 @@ public class MainApplet extends PApplet{
 	}
 
 	public void mouseReleased() {
-		draglock=false;
+		
 		if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
-			count++;
-			//inCircle.add(current);
-			/*for(int i=0; i<count; i++){
-				System.out.println(inCircle.get(i).name);
-				/*inCircle.get(i).x=(float)Math.sin((360/count)*i)*275+650;
-				inCircle.get(i).y=(float)Math.cos((360/count)*i)*275+325;*/
-			//}
+			if(draglock){
+				draglock=false;
+				inCircle.add(current);
+				for(int i=0; i<inCircle.size(); i++){
+					System.out.println((360/inCircle.size())*i);
+					inCircle.get(i).x=(float)(Math.cos((360/inCircle.size())*i)*275)+650;
+					inCircle.get(i).y=(float)(Math.sin((360/inCircle.size())*i)*275)+325;
+				}
+				System.out.println("4---"+inCircle.size());
+			}
 		}
 		else{
+			draglock=false;
 			current.x=curX;
 			current.y=curY;
 		}
