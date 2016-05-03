@@ -58,11 +58,8 @@ public class Character {
 			parent.fill(255);
 			parent.text(name, x+10, y+5,30);}
 		parent.fill(255);
+
 		
-		/*int i;
-		for(i=0; i<targets.size(); i++)
-			parent.line(x, y, targets.get(i)., targets.get(i).y);
-		*/
 	}
 	
 

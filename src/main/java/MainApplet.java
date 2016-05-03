@@ -176,8 +176,18 @@ public class MainApplet extends PApplet{
 			}
 			else
 				character.showName=false;
-			character.display(); // let the character handle its own display
 			
+			ArrayList<Character> targets = character.getTargets();
+			for(Character target:targets){
+				this.strokeWeight(1);
+				this.stroke(0);
+				if(character.inCircle && target.inCircle){
+					this.noFill();
+					this.bezier(character.x,character.y,(650+character.x)/2,(325+character.y)/2,(650+target.x)/2,(325+target.y)/2, target.x, target.y);	
+				}
+					//this.line(character.x, character.y, target.x, target.y);
+			}
+			character.display(); // let the character handle its own display
 		}
 		
 	}
