@@ -47,12 +47,11 @@ public class Character {
 	public void display(){
 			parent.fill(r,g,b,d);
 			parent.stroke(r,g,b,d);
-		
+			parent.strokeWeight(10);
 		parent.ellipse(x, y, 30, 30);
 		parent.fill(0);
-		parent.strokeWeight(10);
+	
 		if(showName){
-			
 			parent.fill(200);
 			parent.stroke(200);
 			parent.rect(x, y-20, name.length()*12, 30);

@@ -160,7 +160,11 @@ public class MainApplet extends PApplet{
 			String name = N.getString("name");
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
-			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color));;
+			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color));
+		}
+		for(int i=0;i<links.size();i++){
+			JSONObject L = links.getJSONObject(i);
+			characters.get(L.getInt("source")).addTarget(characters.get(L.getInt("target")));
 		}
 	}
 
