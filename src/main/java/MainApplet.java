@@ -24,7 +24,6 @@ public class MainApplet extends PApplet{
 	private ArrayList<Character> characters;
 	boolean draglock=false;
 	Character current;
-	float curX, curY;
 	ArrayList<Character> inCircle;
 
 	String episode="starwars-episode-1-interactions.json";
@@ -50,31 +49,55 @@ public class MainApplet extends PApplet{
 				if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
 					current=character;
 					draglock=true;
-					curX=character.x;
-					curY=character.y;
 				}
 			}
 		}
 	}
 
 	public void mouseReleased() {
+
+		System.out.println("----1"+current.inCircle);
 		
-		if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
+		if(current.inCircle){
 			if(draglock){
+				System.out.println("----2"+current.inCircle);
+				
 				draglock=false;
-				current.inCircle=true;
-				inCircle.add(current);
+				current.inCircle=false;
+				current.x=current.oriX;
+				current.y=current.oriY;
+				inCircle.remove(current);
+				
 				for(int i=0; i<inCircle.size(); i++){
 					inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
 					inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
 				}
-				System.out.println("4---"+inCircle.size());
+			
 			}
+			System.out.println("----3"+current.inCircle);
 		}
 		else{
-			draglock=false;
-			current.x=curX;
-			current.y=curY;
+			
+			System.out.println("----4"+current.inCircle);
+			
+			if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
+				if(draglock){
+					draglock=false;
+					current.inCircle=true;
+					inCircle.add(current);
+					for(int i=0; i<inCircle.size(); i++){
+						inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
+						inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
+					}
+					//System.out.println("4---"+inCircle.size());
+				}
+			}
+	
+			else{
+				draglock=false;
+				current.x=current.oriX;
+				current.y=current.oriY;
+			}
 		}
 	}
 	

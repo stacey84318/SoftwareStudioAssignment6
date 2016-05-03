@@ -20,6 +20,7 @@ public class Character {
 	private int r,g,b,d;
 	private ArrayList<Character> targets  = new ArrayList<Character>();
 	boolean inCircle;
+	public float oriX, oriY;
 
 	public Character(MainApplet parent, String name, float x, float y,String color){
 
@@ -27,6 +28,8 @@ public class Character {
 		this.name=name;
 		this.x=x;
 		this.y=y;
+		this.oriX=x;
+		this.oriY=y;
 		this.color = color;
 		this.inCircle=false;
 		this.d = Integer.parseInt(color.substring(1, 3),16);
