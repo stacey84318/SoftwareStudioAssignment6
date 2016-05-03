@@ -53,11 +53,13 @@ public class Character {
 		//Font f =new Font(Font.DIALOG_INPUT, Font.ITALIC, 30);
 		//parent.setFont(f);
 		if(showName){
-			parent.smooth();
-			parent.strokeCap(0);
+			
 			parent.fill(200);
 			parent.stroke(200);
+			parent.strokeWeight(10);
+			
 			parent.rect(x, y-20, name.length()*12, 30);
+		
 			parent.fill(255);
 			parent.text(name, x+10, y+5,30);}
 		parent.fill(255);

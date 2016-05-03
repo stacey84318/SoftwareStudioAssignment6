@@ -131,6 +131,7 @@ public class MainApplet extends PApplet{
 
 	public void draw() {
 		this.background(255);
+		this.strokeWeight(1);
 		this.ellipse(650, 325, 550, 550);
 		for(Character character : characters){
 			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
@@ -139,9 +140,9 @@ public class MainApplet extends PApplet{
 			else
 				character.showName=false;
 			character.display(); // let the character handle its own display
-			
-			
+			this.strokeJoin(ROUND);
 		}
+		
 		
 	}
 
