@@ -13,12 +13,13 @@ import processing.event.MouseEvent;
 public class Character {
 	
 	private MainApplet parent;
-	String name;
+	private String name;
 	public float x, y, radius;
 	boolean showName=false;
 	private String color;
 	private int r,g,b,d;
 	private ArrayList<Character> targets  = new ArrayList<Character>();
+	boolean inCircle;
 
 	public Character(MainApplet parent, String name, float x, float y,String color){
 
@@ -27,6 +28,7 @@ public class Character {
 		this.x=x;
 		this.y=y;
 		this.color = color;
+		this.inCircle=false;
 		this.d = Integer.parseInt(color.substring(1, 3),16);
 		System.out.println(d);
 		this.r = Integer.valueOf(color.substring(3, 5),16);

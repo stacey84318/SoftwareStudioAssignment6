@@ -27,8 +27,6 @@ public class MainApplet extends PApplet{
 	float curX, curY;
 	ArrayList<Character> inCircle;
 
-	int count=0;
-
 	String episode="starwars-episode-1-interactions.json";
 
 	private final static int width = 1200, height = 650;
@@ -38,7 +36,6 @@ public class MainApplet extends PApplet{
 		size(width, height);
 		characters = new ArrayList<Character>();
 		inCircle = new ArrayList<Character>();
-		count=0;
 		smooth();
 		loadData();
 		this.addMouseListener(this);
@@ -65,11 +62,11 @@ public class MainApplet extends PApplet{
 		if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
 			if(draglock){
 				draglock=false;
+				current.inCircle=true;
 				inCircle.add(current);
 				for(int i=0; i<inCircle.size(); i++){
-					System.out.println((360/inCircle.size())*i);
-					inCircle.get(i).x=(float)(Math.cos((360/inCircle.size())*i)*275)+650;
-					inCircle.get(i).y=(float)(Math.sin((360/inCircle.size())*i)*275)+325;
+					inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
+					inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
 				}
 				System.out.println("4---"+inCircle.size());
 			}
