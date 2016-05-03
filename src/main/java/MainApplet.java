@@ -134,13 +134,14 @@ public class MainApplet extends PApplet{
 		this.strokeWeight(1);
 		this.ellipse(650, 325, 550, 550);
 		for(Character character : characters){
+			this.strokeJoin(ROUND);
 			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
 				character.showName=true;
 			}
 			else
 				character.showName=false;
 			character.display(); // let the character handle its own display
-			this.strokeJoin(ROUND);
+			
 		}
 		
 		
