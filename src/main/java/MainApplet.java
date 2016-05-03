@@ -1,7 +1,9 @@
 package main.java;
 
+import java.lang.Object;
+import processing.event.*;
+import processing.event.KeyEvent;
 import java.awt.Component;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.EventObject;
@@ -25,10 +27,14 @@ public class MainApplet extends PApplet{
 	private ArrayList<Character> characters;
 
 	int count=0;
+<<<<<<< HEAD
 
 	String episode="starwars-episode-1-interactions.json";
 
 	
+=======
+	String episode="starwars-episode-1-interactions.json";
+>>>>>>> origin/master
 	private final static int width = 1200, height = 650;
 	
 	
@@ -37,8 +43,13 @@ public class MainApplet extends PApplet{
 		characters = new ArrayList<Character>();	
 		smooth();
 		loadData();
+<<<<<<< HEAD
 		this.addMouseListener(this);
 	    this.addMouseMotionListener(this);
+=======
+		//this.addMouseMotionListener(this);
+		this.addKeyListener(this);
+>>>>>>> origin/master
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -59,39 +70,36 @@ public class MainApplet extends PApplet{
 		role.setLocation(x, y);
 	}
 	 
-	public void keyPressed(KeyEvent e){
-	        switch(e.getKeyCode()){
-	        case KeyEvent.VK_1: 
-	        	episode = "starwars-episode-1-interactions.json";
-	        	break;
-	        case KeyEvent.VK_2: 
-	        	episode = "starwars-episode-2-interactions.json";
-	        	break;
-	        case KeyEvent.VK_3: 
-	        	episode = "starwars-episode-3-interactions.json";
-	        	break;
-	        case KeyEvent.VK_4: 
-	        	episode = "starwars-episode-4-interactions.json";
-	        	break;
-	        case KeyEvent.VK_5: 
-	        	episode = "starwars-episode-5-interactions.json";
-	        	break;
-	        case KeyEvent.VK_6: 
-	        	episode = "starwars-episode-6-interactions.json";
-	        	break;
-	        case KeyEvent.VK_7: 
-	        	episode = "starwars-episode-7-interactions.json";
-	        	break;
-	        default: 
-	        	episode = "starwars-episode-1-interactions.json";
-	        	break;
-	        }
+	public void keyPressed(){
+	        if(key=='1') 
+	        	episode ="starwars-episode-1-interactions.json";
+	        else if(key=='2')  
+	        	episode ="starwars-episode-2-interactions.json";
+	        else if(key=='3')  
+	        	episode ="starwars-episode-3-interactions.json";
+	        else if(key=='4')  
+	        	episode ="starwars-episode-4-interactions.json";
+	        else if(key=='5') 
+	        	episode ="starwars-episode-5-interactions.json";
+	        else if(key=='6') 
+	        	episode ="starwars-episode-6-interactions.json";
+	        else if(key=='7')  
+	        	episode ="starwars-episode-7-interactions.json";
+	        else 
+	        	episode ="starwars-episode-1-interactions.json";
+	        	
+	        setup();
+	        
 	       }
 
 	public void draw() {
-		this.background(200);
+		this.background(255);
 		this.ellipse(650, 325, 550, 550);
 		for(Character character : characters){
+			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30)
+				character.showName=true;
+			else
+				character.showName=false;
 			character.display(); // let the character handle its own display
 			
 			
@@ -100,9 +108,13 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
+<<<<<<< HEAD
 		
 		this.data = loadJSONObject(path+episode);
 
+=======
+		this.data = loadJSONObject(path+episode);
+>>>>>>> origin/master
 		this.nodes = data.getJSONArray("nodes");
 		this.links = data.getJSONArray("links");
 		System.out.println(nodes.size());
@@ -113,9 +125,14 @@ public class MainApplet extends PApplet{
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
 
+<<<<<<< HEAD
 			this.characters.add(new Character(this,name,50+(i/10)*50,50+(i%10)*50));;
 		}
 
+=======
+			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color));;
+		}
+>>>>>>> origin/master
 
 	}
 
