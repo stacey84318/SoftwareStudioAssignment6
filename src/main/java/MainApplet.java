@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
 import processing.event.MouseEvent;
@@ -25,6 +26,7 @@ public class MainApplet extends PApplet{
 	boolean draglock=false;
 	Character current;
 	ArrayList<Character> inCircle;
+	boolean releaseDetect=false;
 
 	String episode="starwars-episode-1-interactions.json";
 
@@ -39,24 +41,27 @@ public class MainApplet extends PApplet{
 		loadData();
 		this.addMouseListener(this);
 	    this.addMouseMotionListener(this);
-		//this.addMouseMotionListener(this);
 		this.addKeyListener(this);
 	}
 	
 	public void mousePressed() {
-		if(mouseX>=860&&mouseX<=1140&&mouseY>=40&&mouseY<=160){
+		if(mouseX>=1000&&mouseX<=1140&&mouseY>=80&&mouseY<=120){
+			releaseDetect=false;
+
+			System.out.println("in add all");
 			for(Character character : characters){
 				if(character.inCircle==false){
 					character.inCircle=true;
 					inCircle.add(character);
 				}
-				for(int i=0; i<inCircle.size(); i++){
-					inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
-					inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
-				}
+			}
+			for(int i=0; i<inCircle.size(); i++){
+				inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
+				inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
 			}
 		}
-		else if(mouseX>=860&&mouseX<=1140&&mouseY>=120&&mouseY<=240){
+		else if(mouseX>=1000&&mouseX<=1140&&mouseY>=120&&mouseY<=180){
+			releaseDetect=false;
 			System.out.println("in remove");
 			for(int i=0; i<inCircle.size(); i++){
 				inCircle.get(i).inCircle=false;
@@ -66,6 +71,7 @@ public class MainApplet extends PApplet{
 			inCircle.removeAll(inCircle);
 		}
 		else{
+			releaseDetect=true;
 			if(draglock==false){
 				for(Character character : characters){
 					if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
@@ -79,55 +85,60 @@ public class MainApplet extends PApplet{
 
 	public void mouseReleased() {
 
-		System.out.println("----1"+current.inCircle);
-		
-		if(current.inCircle){
-			if(draglock){
-				System.out.println("----2"+current.inCircle);
-				
-				draglock=false;
-				current.inCircle=false;
-				current.x=current.oriX;
-				current.y=current.oriY;
-				inCircle.remove(current);
-				
-				for(int i=0; i<inCircle.size(); i++){
-					inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
-					inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
-				}
-			
-			}
-			//System.out.println("----3"+current.inCircle);
-		}
-		else{
-			
-			//System.out.println("----4"+current.inCircle);
-			
-			if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
+		//System.out.println("----1"+current.inCircle);
+		if(releaseDetect){
+			if(current!=null&&current.inCircle){
 				if(draglock){
-					draglock=false;
-					current.inCircle=true;
-					inCircle.add(current);
+					//System.out.println("----2"+current.inCircle);
+					if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)>275*275){
+						draglock=false;
+						current.inCircle=false;
+						current.x=current.oriX;
+						current.y=current.oriY;
+						inCircle.remove(current);
+					}
+					
 					for(int i=0; i<inCircle.size(); i++){
 						inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
 						inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
+					}	
+				}
+				//System.out.println("----3"+current.inCircle);
+			}
+			else{
+				
+				//System.out.println("----4"+current.inCircle);
+				
+				if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
+					if(draglock){
+						draglock=false;
+						current.inCircle=true;
+						inCircle.add(current);
+						for(int i=0; i<inCircle.size(); i++){
+							inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
+							inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
+						}
+						//System.out.println("4---"+inCircle.size());
 					}
-					//System.out.println("4---"+inCircle.size());
+				}
+		
+				else{
+					draglock=false;
+					current.x=current.oriX;
+					current.y=current.oriY;
 				}
 			}
-	
-			else{
-				draglock=false;
-				current.x=current.oriX;
-				current.y=current.oriY;
-			}
+			releaseDetect=false;
 		}
+		else{}
 	}
 	
 	public void mouseDragged() {
-		current.x=mouseX;
-		current.y=mouseY;
-		current.display();
+		if(releaseDetect){
+			current.x=mouseX;
+			current.y=mouseY;
+			current.display();
+		}
 	}
 	 
 	public void keyPressed(){
@@ -157,17 +168,22 @@ public class MainApplet extends PApplet{
 		this.strokeWeight(1);
 		this.ellipse(650, 325, 550, 550);
 		
+		this.strokeJoin(ROUND);
 		this.fill(200);
-		this.stroke(255, 255, 255);
-		this.rect(1000, 100, 140, 60);
-		this.fill(255);
-		this.text("ADD ALL", 1020, 120);
+		this.stroke(200);
+		this.strokeWeight(20);
+		this.rect(1000, 80, 140, 40);
+		this.rect(1000, 160, 140, 40);
 		
-		this.fill(200);
-		this.stroke(255, 255, 255);
-		this.rect(1000, 180, 140, 60);
+		PFont f;
+		f = createFont("Arial",16,true);
+		textFont(f,20);
+		
 		this.fill(255);
-		this.text("CLEAR", 1020, 200);
+		this.text("ADD ALL", 1025, 110);
+		
+		this.fill(255);
+		this.text("CLEAR", 1030, 190);
 		
 		for(Character character : characters){
 			this.strokeJoin(ROUND);
