@@ -44,11 +44,34 @@ public class MainApplet extends PApplet{
 	}
 	
 	public void mousePressed() {
-		if(draglock==false){
+		if(mouseX>=860&&mouseX<=1140&&mouseY>=40&&mouseY<=160){
 			for(Character character : characters){
-				if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
-					current=character;
-					draglock=true;
+				if(character.inCircle==false){
+					character.inCircle=true;
+					inCircle.add(character);
+				}
+				for(int i=0; i<inCircle.size(); i++){
+					inCircle.get(i).x=(float)(Math.cos(Math.toRadians((360/inCircle.size())*i))*275)+650;
+					inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
+				}
+			}
+		}
+		else if(mouseX>=860&&mouseX<=1140&&mouseY>=120&&mouseY<=240){
+			System.out.println("in remove");
+			for(int i=0; i<inCircle.size(); i++){
+				inCircle.get(i).inCircle=false;
+				inCircle.get(i).x=inCircle.get(i).oriX;
+				inCircle.get(i).y=inCircle.get(i).oriY;
+			}
+			inCircle.removeAll(inCircle);
+		}
+		else{
+			if(draglock==false){
+				for(Character character : characters){
+					if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
+						current=character;
+						draglock=true;
+					}
 				}
 			}
 		}
@@ -74,11 +97,11 @@ public class MainApplet extends PApplet{
 				}
 			
 			}
-			System.out.println("----3"+current.inCircle);
+			//System.out.println("----3"+current.inCircle);
 		}
 		else{
 			
-			System.out.println("----4"+current.inCircle);
+			//System.out.println("----4"+current.inCircle);
 			
 			if((mouseX-650)*(mouseX-650)+(mouseY-325)*(mouseY-325)<=275*275){
 				if(draglock){
@@ -133,6 +156,19 @@ public class MainApplet extends PApplet{
 		this.background(255);
 		this.strokeWeight(1);
 		this.ellipse(650, 325, 550, 550);
+		
+		this.fill(200);
+		this.stroke(255, 255, 255);
+		this.rect(1000, 100, 140, 60);
+		this.fill(255);
+		this.text("ADD ALL", 1020, 120);
+		
+		this.fill(200);
+		this.stroke(255, 255, 255);
+		this.rect(1000, 180, 140, 60);
+		this.fill(255);
+		this.text("CLEAR", 1020, 200);
+		
 		for(Character character : characters){
 			this.strokeJoin(ROUND);
 			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
@@ -143,7 +179,6 @@ public class MainApplet extends PApplet{
 			character.display(); // let the character handle its own display
 			
 		}
-		
 		
 	}
 
