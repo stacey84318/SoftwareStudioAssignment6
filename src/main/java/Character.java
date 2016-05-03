@@ -60,22 +60,18 @@ public class Character {
 		parent.ellipse(x, y, 40, 40);
 		if(showName){
 			parent.fill(105,105,105,200);
-			
 			parent.rect(x, y-10, name.length()*12, 20);
-			
 			parent.fill(255);
+
 			parent.text(name, x+10, y+5,30);
 			}
 		parent.fill(255);
-
-		
 	}
 	
 
 
 	public void addTarget(Character target,int value){
 		targets.add(target);
-	
 	}
 	
 	public ArrayList<Character> getTargets(){

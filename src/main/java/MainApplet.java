@@ -4,6 +4,7 @@ import java.lang.Object;
 import processing.event.*;
 import processing.event.KeyEvent;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.EventObject;
 
@@ -226,6 +227,7 @@ public class MainApplet extends PApplet{
 					
 			}
 			this.stroke(105,105,105,200);
+			this.textFont(f, 13);
 			character.display(); // let the character handle its own display
 		}
 		
