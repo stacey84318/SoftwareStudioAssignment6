@@ -4,16 +4,13 @@ import java.lang.Object;
 import processing.event.*;
 import processing.event.KeyEvent;
 import java.awt.Component;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.EventObject;
 
 import processing.core.PApplet;
 import processing.data.JSONArray;
 import processing.data.JSONObject;
-//import processing.event.MouseEvent;
-
-import java.awt.*;
+import processing.event.MouseEvent;
 
 /**
 * This class is for sketching outcome using Processing
@@ -25,16 +22,13 @@ public class MainApplet extends PApplet{
 	JSONObject data;
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
+	boolean draglock=false;
+	Character current;
 
 	int count=0;
-<<<<<<< HEAD
 
 	String episode="starwars-episode-1-interactions.json";
 
-	
-=======
-	String episode="starwars-episode-1-interactions.json";
->>>>>>> origin/master
 	private final static int width = 1200, height = 650;
 	
 	
@@ -43,31 +37,31 @@ public class MainApplet extends PApplet{
 		characters = new ArrayList<Character>();	
 		smooth();
 		loadData();
-<<<<<<< HEAD
 		this.addMouseListener(this);
 	    this.addMouseMotionListener(this);
-=======
 		//this.addMouseMotionListener(this);
 		this.addKeyListener(this);
->>>>>>> origin/master
 	}
-
-	public void mouseReleased(MouseEvent e) {
-		if(e.getX()>=375&&e.getX()<=925&&e.getY()>=50&&e.getY()<=600){
-			count++;
-			setDot((Character)e.getSource(),e.getX(),e.getY());
+	
+	public void mousePressed() {
+		if(draglock==false){
+			for(Character character : characters){
+				if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
+					current=character;
+					draglock=true;
+				}
+			}
 		}
-		   
-	}
-	
-	public void mouseDragged(MouseEvent e) {
-		((Character)e.getSource()).setLocation(e.getX(),e.getY()); 
 	}
 
+	public void mouseReleased() {
+		draglock=false;
+	}
 	
-	public void setDot(Character role, int x, int y){
-		
-		role.setLocation(x, y);
+	public void mouseDragged() {
+		current.x=mouseX;
+		current.y=mouseY;
+		current.display();
 	}
 	 
 	public void keyPressed(){
@@ -96,8 +90,9 @@ public class MainApplet extends PApplet{
 		this.background(255);
 		this.ellipse(650, 325, 550, 550);
 		for(Character character : characters){
-			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30)
+			if(mouseX<character.x+10+30 && mouseX>character.x+10-30 && mouseY<character.y+30 && mouseY>character.y-30){
 				character.showName=true;
+			}
 			else
 				character.showName=false;
 			character.display(); // let the character handle its own display
@@ -108,13 +103,9 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
-<<<<<<< HEAD
 		
 		this.data = loadJSONObject(path+episode);
 
-=======
-		this.data = loadJSONObject(path+episode);
->>>>>>> origin/master
 		this.nodes = data.getJSONArray("nodes");
 		this.links = data.getJSONArray("links");
 		System.out.println(nodes.size());
@@ -124,16 +115,8 @@ public class MainApplet extends PApplet{
 			String name = N.getString("name");
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
-
-<<<<<<< HEAD
-			this.characters.add(new Character(this,name,50+(i/10)*50,50+(i%10)*50));;
-		}
-
-=======
 			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color));;
 		}
->>>>>>> origin/master
-
 	}
 
 }
