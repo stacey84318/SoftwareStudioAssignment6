@@ -24,21 +24,21 @@ public class MainApplet extends PApplet{
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
 
-<<<<<<< HEAD
-	int episode=0;
 	int count=0;
-=======
+
 	String episode="starwars-episode-1-interactions.json";
->>>>>>> origin/master
+
 	
 	private final static int width = 1200, height = 650;
+	
 	
 	public void setup() {
 		size(width, height);
 		characters = new ArrayList<Character>();	
 		smooth();
 		loadData();
-		//this.addMouseMotionListener(this);
+		this.addMouseListener(this);
+	    this.addMouseMotionListener(this);
 	}
 
 	public void mouseReleased(MouseEvent e) {
@@ -52,6 +52,7 @@ public class MainApplet extends PApplet{
 	public void mouseDragged(MouseEvent e) {
 		((Character)e.getSource()).setLocation(e.getX(),e.getY()); 
 	}
+
 	
 	public void setDot(Character role, int x, int y){
 		
@@ -99,13 +100,9 @@ public class MainApplet extends PApplet{
 	}
 
 	private void loadData(){
-<<<<<<< HEAD
-		/*if(episode!=0)
-			this.data = loadJSONObject("file"+episode);
-=======
 		
 		this.data = loadJSONObject(path+episode);
->>>>>>> origin/master
+
 		this.nodes = data.getJSONArray("nodes");
 		this.links = data.getJSONArray("links");
 		System.out.println(nodes.size());
@@ -115,14 +112,10 @@ public class MainApplet extends PApplet{
 			String name = N.getString("name");
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
-<<<<<<< HEAD
-			this.characters.add(new Character(this,name,(i/10)*20,i*10));
-			
-		}*/
-=======
+
 			this.characters.add(new Character(this,name,50+(i/10)*50,50+(i%10)*50));;
 		}
->>>>>>> origin/master
+
 
 	}
 
