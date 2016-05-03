@@ -142,25 +142,40 @@ public class MainApplet extends PApplet{
 	}
 	 
 	public void keyPressed(){
-	        if(key=='1')
+	        if(key=='1'){
 	        	episode ="starwars-episode-1-interactions.json";
-	        else if(key=='2')  
+	        	num_episode=1;
+	        }
+	        else if(key=='2'){  
 	        	episode ="starwars-episode-2-interactions.json";
-	        else if(key=='3')  
+	        	num_episode=2;
+	        }
+	        else if(key=='3'){  
 	        	episode ="starwars-episode-3-interactions.json";
-	        else if(key=='4')  
+	        	num_episode=3;
+	        }
+	        else if(key=='4'){ 
 	        	episode ="starwars-episode-4-interactions.json";
-	        else if(key=='5') 
+	        	num_episode=4;
+	        }
+	        else if(key=='5'){ 
 	        	episode ="starwars-episode-5-interactions.json";
-	        else if(key=='6') 
+	        	num_episode=5;
+	        }
+	        else if(key=='6'){ 
 	        	episode ="starwars-episode-6-interactions.json";
-	        else if(key=='7')  
+	        	num_episode=6;
+	        }
+	        else if(key=='7'){  
 	        	episode ="starwars-episode-7-interactions.json";
-	        else 
+	        	num_episode=7;
+	        }
+	        else{ 
 	        	episode ="starwars-episode-1-interactions.json";
+	        	num_episode=1;
+	        }
 	        	
 	        setup();
-	        num_episode=Integer.valueOf(key);
 	}
 
 	public void draw() {
