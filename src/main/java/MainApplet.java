@@ -29,6 +29,7 @@ public class MainApplet extends PApplet{
 	boolean releaseDetect=false;
 
 	String episode="starwars-episode-1-interactions.json";
+	int num_episode=1;
 
 	private final static int width = 1200, height = 650;
 	
@@ -48,7 +49,7 @@ public class MainApplet extends PApplet{
 		if(mouseX>=1000&&mouseX<=1140&&mouseY>=80&&mouseY<=120){
 			releaseDetect=false;
 
-			System.out.println("in add all");
+			//System.out.println("in add all");
 			for(Character character : characters){
 				if(character.inCircle==false){
 					character.inCircle=true;
@@ -62,7 +63,7 @@ public class MainApplet extends PApplet{
 		}
 		else if(mouseX>=1000&&mouseX<=1140&&mouseY>=120&&mouseY<=180){
 			releaseDetect=false;
-			System.out.println("in remove");
+			//System.out.println("in remove");
 			for(int i=0; i<inCircle.size(); i++){
 				inCircle.get(i).inCircle=false;
 				inCircle.get(i).x=inCircle.get(i).oriX;
@@ -130,7 +131,6 @@ public class MainApplet extends PApplet{
 			}
 			releaseDetect=false;
 		}
-		else{}
 	}
 	
 	public void mouseDragged() {
@@ -142,7 +142,7 @@ public class MainApplet extends PApplet{
 	}
 	 
 	public void keyPressed(){
-	        if(key=='1') 
+	        if(key=='1')
 	        	episode ="starwars-episode-1-interactions.json";
 	        else if(key=='2')  
 	        	episode ="starwars-episode-2-interactions.json";
@@ -160,24 +160,30 @@ public class MainApplet extends PApplet{
 	        	episode ="starwars-episode-1-interactions.json";
 	        	
 	        setup();
-	        
-	       }
+	        num_episode=Integer.valueOf(key);
+	}
 
 	public void draw() {
+		
+		PFont f;
+		f = createFont("Arial",16,true);
+		
 		this.background(255);
 		this.strokeWeight(1);
 		this.stroke(200);
 		this.ellipse(650, 325, 550, 550);
+		
+		textFont(f,30);
+		this.fill(100);
+		this.text("Star Wars "+num_episode, 575, 30);
 		
 		this.strokeJoin(ROUND);
 		this.fill(200);
 		this.stroke(200);
 		this.strokeWeight(20);
 		this.rect(1000, 80, 140, 40);
-		this.rect(1000, 160, 140, 40);
+		this.rect(1000, 160, 140, 40);	
 		
-		PFont f;
-		f = createFont("Arial",16,true);
 		textFont(f,20);
 		
 		this.fill(255);
