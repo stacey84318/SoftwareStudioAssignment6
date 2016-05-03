@@ -13,7 +13,7 @@ import processing.event.MouseEvent;
 public class Character {
 	
 	private MainApplet parent;
-	private String name;
+	String name;
 	public float x, y, radius;
 	boolean showName=false;
 	private String color;
@@ -57,7 +57,7 @@ public class Character {
 		
 		/*int i;
 		for(i=0; i<targets.size(); i++)
-			parent.line(x, y, targets.get(i).x, targets.get(i).y);
+			parent.line(x, y, targets.get(i)., targets.get(i).y);
 		*/
 	}
 	
