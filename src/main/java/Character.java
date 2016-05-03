@@ -18,11 +18,12 @@ public class Character {
 	boolean showName=false;
 	private String color;
 	private int r,g,b,d;
+	int value;
 	private ArrayList<Character> targets  = new ArrayList<Character>();
 	boolean inCircle;
 	public float oriX, oriY;
 
-	public Character(MainApplet parent, String name, float x, float y,String color){
+	public Character(MainApplet parent, String name, float x, float y,String color,int value){
 
 		this.parent = parent;
 		this.name=name;
@@ -40,23 +41,31 @@ public class Character {
 		System.out.println(g);
 		this.b = Integer.valueOf(color.substring(7, 9),16);
 		System.out.println(b);
-		
+		this.value = value;
 		
 	}
 
 	public void display(){
+		if(inCircle){
+			
+			parent.fill(r,g,b,d-50);
+			parent.stroke(r,g,b,d-50);
+			parent.noStroke();
+		}
+		else{
 			parent.fill(r,g,b,d);
-			parent.stroke(r,g,b,d);
-			parent.strokeWeight(10);
-		parent.ellipse(x, y, 30, 30);
-		parent.fill(0);
-	
+			parent.stroke(r,g,b,d-50);
+			parent.noStroke();
+		}
+		parent.ellipse(x, y, 40, 40);
 		if(showName){
-			parent.fill(200);
-			parent.stroke(200);
-			parent.rect(x, y-20, name.length()*12, 30);
+			parent.fill(105,105,105,200);
+			
+			parent.rect(x, y-10, name.length()*12, 20);
+			
 			parent.fill(255);
-			parent.text(name, x+10, y+5,30);}
+			parent.text(name, x+10, y+5,30);
+			}
 		parent.fill(255);
 
 		
@@ -64,8 +73,9 @@ public class Character {
 	
 
 
-	public void addTarget(Character target){
+	public void addTarget(Character target,int value){
 		targets.add(target);
+	
 	}
 	
 	public ArrayList<Character> getTargets(){

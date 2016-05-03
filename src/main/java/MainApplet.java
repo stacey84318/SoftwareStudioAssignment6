@@ -166,6 +166,7 @@ public class MainApplet extends PApplet{
 	public void draw() {
 		this.background(255);
 		this.strokeWeight(1);
+		this.stroke(200);
 		this.ellipse(650, 325, 550, 550);
 		
 		this.strokeJoin(ROUND);
@@ -195,14 +196,15 @@ public class MainApplet extends PApplet{
 			
 			ArrayList<Character> targets = character.getTargets();
 			for(Character target:targets){
-				this.strokeWeight(1);
+				this.strokeWeight(1+target.value/10);
 				this.stroke(0);
 				if(character.inCircle && target.inCircle){
 					this.noFill();
 					this.bezier(character.x,character.y,(650+character.x)/2,(325+character.y)/2,(650+target.x)/2,(325+target.y)/2, target.x, target.y);	
 				}
-					//this.line(character.x, character.y, target.x, target.y);
+					
 			}
+			this.stroke(105,105,105,200);
 			character.display(); // let the character handle its own display
 		}
 		
@@ -221,11 +223,11 @@ public class MainApplet extends PApplet{
 			String name = N.getString("name");
 			String color = N.getString("colour");
 			System.out.println(name+","+value+","+color);
-			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color));
+			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color,value));
 		}
 		for(int i=0;i<links.size();i++){
 			JSONObject L = links.getJSONObject(i);
-			characters.get(L.getInt("source")).addTarget(characters.get(L.getInt("target")));
+			characters.get(L.getInt("source")).addTarget(characters.get(L.getInt("target")),L.getInt("value") );
 		}
 	}
 
