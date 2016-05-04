@@ -50,7 +50,7 @@ public class MainApplet extends PApplet{
 		if(mouseX>=1000&&mouseX<=1140&&mouseY>=80&&mouseY<=120){
 			releaseDetect=false;
 
-			//System.out.println("in add all");
+System.out.println("in add all");
 			for(Character character : characters){
 				if(character.inCircle==false){
 					character.inCircle=true;
@@ -64,7 +64,7 @@ public class MainApplet extends PApplet{
 		}
 		else if(mouseX>=1000&&mouseX<=1140&&mouseY>=120&&mouseY<=180){
 			releaseDetect=false;
-			//System.out.println("in remove");
+			System.out.println("in remove");
 			for(int i=0; i<inCircle.size(); i++){
 				inCircle.get(i).inCircle=false;
 				inCircle.get(i).x=inCircle.get(i).oriX;
