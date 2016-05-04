@@ -24,7 +24,7 @@ public class Character {
 	public float oriX, oriY;
 
 	public Character(MainApplet parent, String name, float x, float y,String color,int value){
-
+		//建構Character 
 		this.parent = parent;
 		this.name=name;
 		this.x=x;
@@ -33,6 +33,7 @@ public class Character {
 		this.oriY=y;
 		this.color = color;
 		this.inCircle=false;
+		//將檔案的colour 轉為d r g b 的 int
 		this.d = Integer.parseInt(color.substring(1, 3),16);
 		this.r = Integer.valueOf(color.substring(3, 5),16);
 		this.g = Integer.valueOf(color.substring(5, 7),16);
@@ -42,18 +43,22 @@ public class Character {
 	}
 
 	public void display(){
-		if(inCircle){
-			
+		//設置點的顯示方式
+		//in circle
+		if(inCircle){			
 			parent.fill(r,g,b,d-50);
 			parent.stroke(r,g,b,d-50);
 			parent.noStroke();
 		}
-		else{
+		else{//not in circle
 			parent.fill(r,g,b,d);
 			parent.stroke(r,g,b,d-50);
 			parent.noStroke();
 		}
+		
 		parent.ellipse(x, y, 40, 40);
+		
+		//滑鼠指到該點才顯示名字
 		if(showName){
 			parent.fill(105,105,105,200);
 			parent.rect(x, y-10, name.length()*12, 20);
@@ -65,7 +70,7 @@ public class Character {
 	}
 	
 
-
+	//add targey
 	public void addTarget(Character target,int value){
 		targets.add(target);
 	}
