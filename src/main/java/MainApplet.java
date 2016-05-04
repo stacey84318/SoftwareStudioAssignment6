@@ -54,6 +54,13 @@ public class MainApplet extends PApplet{
 		//設置滑鼠事件，點到某固定區塊發生固定事件，第一個為加入全部的點
 		if(mouseX>=980&&mouseX<=1160&&mouseY>=60&&mouseY<=140){
 			releaseDetect=false;
+<<<<<<< HEAD
+=======
+
+
+			System.out.println("in add all");
+
+>>>>>>> origin/master
 			for(Character character : characters){
 			//若該點尚未在circle裡，要加入
 				if(character.inCircle==false){
@@ -70,7 +77,11 @@ public class MainApplet extends PApplet{
 		//如果點到clear
 		else if(mouseX>=980&&mouseX<=1160&&mouseY>=140&&mouseY<=220){
 			releaseDetect=false;
+<<<<<<< HEAD
 			//把點放回原處
+=======
+			System.out.println("in remove");
+>>>>>>> origin/master
 			for(int i=0; i<inCircle.size(); i++){
 				inCircle.get(i).inCircle=false;
 				inCircle.get(i).x=inCircle.get(i).oriX;
