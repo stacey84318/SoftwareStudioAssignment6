@@ -25,6 +25,7 @@ public class MainApplet extends PApplet{
 	JSONArray nodes, links;
 	private ArrayList<Character> characters;
 	boolean draglock=false;
+	int last_key='0';
 	Character current;
 	ArrayList<Character> inCircle;
 	boolean releaseDetect=false;
@@ -47,10 +48,14 @@ public class MainApplet extends PApplet{
 	}
 	
 	public void mousePressed() {
-		if(mouseX>=1000&&mouseX<=1140&&mouseY>=80&&mouseY<=120){
+		if(mouseX>=980&&mouseX<=1160&&mouseY>=60&&mouseY<=140){
 			releaseDetect=false;
+<<<<<<< HEAD
 
 System.out.println("in add all");
+=======
+			//System.out.println("in add all");
+>>>>>>> origin/master
 			for(Character character : characters){
 				if(character.inCircle==false){
 					character.inCircle=true;
@@ -62,7 +67,7 @@ System.out.println("in add all");
 				inCircle.get(i).y=(float)(Math.sin(Math.toRadians((360/inCircle.size())*i))*275)+325;
 			}
 		}
-		else if(mouseX>=1000&&mouseX<=1140&&mouseY>=120&&mouseY<=180){
+		else if(mouseX>=980&&mouseX<=1160&&mouseY>=140&&mouseY<=220){
 			releaseDetect=false;
 			System.out.println("in remove");
 			for(int i=0; i<inCircle.size(); i++){
@@ -73,6 +78,7 @@ System.out.println("in add all");
 			inCircle.removeAll(inCircle);
 		}
 		else{
+			//System.out.println("elllse! "+mouseX+","+mouseY);
 			releaseDetect=true;
 			if(draglock==false){
 				for(Character character : characters){
@@ -143,40 +149,50 @@ System.out.println("in add all");
 	}
 	 
 	public void keyPressed(){
+		if(key!=last_key){
 	        if(key=='1'){
 	        	episode ="starwars-episode-1-interactions.json";
 	        	num_episode=1;
+	        	System.out.println(key);
 	        }
 	        else if(key=='2'){  
 	        	episode ="starwars-episode-2-interactions.json";
 	        	num_episode=2;
+	        	System.out.println(key);
 	        }
 	        else if(key=='3'){  
 	        	episode ="starwars-episode-3-interactions.json";
 	        	num_episode=3;
+	        	System.out.println(key);
 	        }
 	        else if(key=='4'){ 
 	        	episode ="starwars-episode-4-interactions.json";
 	        	num_episode=4;
+	        	System.out.println(key);
 	        }
 	        else if(key=='5'){ 
 	        	episode ="starwars-episode-5-interactions.json";
 	        	num_episode=5;
+	        	System.out.println(key);
 	        }
 	        else if(key=='6'){ 
 	        	episode ="starwars-episode-6-interactions.json";
 	        	num_episode=6;
+	        	System.out.println(key);
 	        }
 	        else if(key=='7'){  
 	        	episode ="starwars-episode-7-interactions.json";
 	        	num_episode=7;
+	        	System.out.println(key);
 	        }
 	        else{ 
 	        	episode ="starwars-episode-1-interactions.json";
 	        	num_episode=1;
+	        	System.out.println(key);
 	        }
-	        	
+	        last_key=key;
 	        setup();
+		}
 	}
 
 	public void draw() {
@@ -223,29 +239,24 @@ System.out.println("in add all");
 				if(character.inCircle && target.inCircle){
 					this.noFill();
 					this.bezier(character.x,character.y,(650+character.x)/2,(325+character.y)/2,(650+target.x)/2,(325+target.y)/2, target.x, target.y);	
-				}
-					
+				}	
 			}
 			this.stroke(105,105,105,200);
 			this.textFont(f, 13);
 			character.display(); // let the character handle its own display
 		}
-		
 	}
 
 	private void loadData(){
 		
 		this.data = loadJSONObject(path+episode);
-
 		this.nodes = data.getJSONArray("nodes");
 		this.links = data.getJSONArray("links");
-		System.out.println(nodes.size());
 		for(int i = 0 ;i<nodes.size();i++){
 			JSONObject N = nodes.getJSONObject(i);
 			int value = N.getInt("value");
 			String name = N.getString("name");
 			String color = N.getString("colour");
-			System.out.println(name+","+value+","+color);
 			this.characters.add(new Character(this,name,50+(i/10)*70,50+(i%10)*60+((i/10)%2)*30,color,value));
 		}
 		for(int i=0;i<links.size();i++){

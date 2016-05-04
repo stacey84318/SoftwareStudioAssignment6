@@ -34,13 +34,9 @@ public class Character {
 		this.color = color;
 		this.inCircle=false;
 		this.d = Integer.parseInt(color.substring(1, 3),16);
-		System.out.println(d);
 		this.r = Integer.valueOf(color.substring(3, 5),16);
-		System.out.println(r);
 		this.g = Integer.valueOf(color.substring(5, 7),16);
-		System.out.println(g);
 		this.b = Integer.valueOf(color.substring(7, 9),16);
-		System.out.println(b);
 		this.value = value;
 		
 	}
