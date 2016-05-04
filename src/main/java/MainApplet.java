@@ -50,12 +50,10 @@ public class MainApplet extends PApplet{
 	public void mousePressed() {
 		if(mouseX>=980&&mouseX<=1160&&mouseY>=60&&mouseY<=140){
 			releaseDetect=false;
-<<<<<<< HEAD
 
-System.out.println("in add all");
-=======
-			//System.out.println("in add all");
->>>>>>> origin/master
+
+			System.out.println("in add all");
+
 			for(Character character : characters){
 				if(character.inCircle==false){
 					character.inCircle=true;
